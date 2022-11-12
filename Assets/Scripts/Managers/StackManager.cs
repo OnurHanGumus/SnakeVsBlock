@@ -17,14 +17,12 @@ namespace Managers
 
         #region Public Variables
         public List<GameObject> CollectableStack = new List<GameObject>();
-        public List<GameObject> UnstackList = new List<GameObject>();
         public ItemAddOnStackCommand ItemAddOnStack;
 
         #endregion
 
         #region Seralized Veriables
         [SerializeField] private GameObject levelHolder;
-        //[SerializeField] private GameObject collectable;
         #endregion
 
         #region Private Variables
@@ -35,29 +33,29 @@ namespace Managers
         private GameObject _playerGameObject;
         private bool _isActive = false;
 
-
-        private Vector3 _direction;
-
         #endregion
         #endregion
 
         private void Awake()
         {
-            _stackData = GetStackData();
             Init();
+
+
         }
 
         private StackData GetStackData() => Resources.Load<CD_Stack>("Data/CD_Stack").Data;
 
         private void Init()
         {
+            _stackData = GetStackData();
+
             _stackMoveController = new StackMoveController();
             _stackMoveController.InisializedController(_stackData);
             ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
+
             //_itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack, ref levelHolder);
             //_randomRemoveListItemCommand = new RandomRemoveListItemCommand(ref CollectableStack, ref levelHolder);
             //_stackShackAnimCommand = new StackShackAnimCommand(ref CollectableStack, _stackData);
-            //_initialzeStackCommand = new InitialzeStackCommand(collectable, this);
             //_setColorState = new SetColorState(ref CollectableStack);
             //_dublicateStateItemsCommand = new DublicateStateItemsCommand(ref CollectableStack, ref ItemAddOnStack);
             //_stackItemBorder = new StackItemBorder(ref UnstackList);
@@ -99,7 +97,7 @@ namespace Managers
 
         private void Start()
         {
-            //ScoreSignals.Instance.onSetScore?.Invoke(CollectableStack.Count);
+            ItemAddOnStack.Execute(_stackData.InitializeStackAmount);
         }
 
         private void Update()

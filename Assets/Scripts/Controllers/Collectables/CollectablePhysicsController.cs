@@ -13,11 +13,11 @@ namespace Controllers
         #region Self Variables
 
         #region Serialized Variables
-
+        [SerializeField] private CollectableManager manager;
         #endregion
 
         #region Private Variables
-        private PlayerManager _manager;
+        private CollectableManager _manager;
 
 
 
@@ -31,14 +31,14 @@ namespace Controllers
 
         private void Init()
         {
-            _manager = GetComponent<PlayerManager>();
+
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
-                StackSignals.Instance.onInteractionCollectable?.Invoke(transform.parent.gameObject, 5);
+                StackSignals.Instance.onInteractionCollectable?.Invoke(transform.parent.gameObject, manager.Value);
             }
         }
     }
