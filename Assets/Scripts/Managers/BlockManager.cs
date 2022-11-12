@@ -8,6 +8,7 @@ using Keys;
 using Signals;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Random = UnityEngine.Random;
 
 public class BlockManager : MonoBehaviour
 {
@@ -51,11 +52,12 @@ public class BlockManager : MonoBehaviour
     {
         _blockScoreController = GetComponent<BlockScoreController>();
     }
-    public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+    public BlockColorData GetData() => Resources.Load<CD_BlockColor>("Data/CD_BlockColor").Data;
 
     private void OnEnable()
     {
         SubscribeEvents();
+        SetRandomNumber();
     }
 
 
@@ -76,6 +78,11 @@ public class BlockManager : MonoBehaviour
 
     private void Start()
     {
+        
+    }
 
+    private void SetRandomNumber()
+    {
+        Value = Random.Range(1, 50);
     }
 }
