@@ -11,6 +11,7 @@ namespace Signals
     {
         public UnityAction<GameObject,int> onInteractionCollectable = delegate { };
         public UnityAction onInteractionCube = delegate { };
+        public UnityAction<int> onCountChanged= delegate { };
 
         public Func<int> onGetStackCount = delegate { return 0; };
     }

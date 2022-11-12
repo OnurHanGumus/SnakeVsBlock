@@ -34,7 +34,8 @@ namespace Commands
                 _collectableStack.Add(temp);
             }
 
-            
+            StackSignals.Instance.onCountChanged?.Invoke(_collectableStack.Count);
+
             //ScoreSignals.Instance.onSetScore?.Invoke(_collectableStack.Count);
         }
     }

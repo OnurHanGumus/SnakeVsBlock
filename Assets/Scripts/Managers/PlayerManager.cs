@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     #endregion
     #region Private Variables
     private PlayerMovementController _movementController;
+    private PlayerScoreController _scoreController;
 
     #endregion
     #endregion
@@ -34,7 +35,7 @@ public class PlayerManager : MonoBehaviour
     private void Init()
     {
         _movementController = GetComponent<PlayerMovementController>();
-
+        _scoreController = GetComponent<PlayerScoreController>();
     }
     public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
@@ -51,6 +52,7 @@ public class PlayerManager : MonoBehaviour
         StackSignals.Instance.onInteractionCube += _movementController.OnInteractionBlock;
         BlockSignals.Instance.onBlockBreaked += _movementController.OnExitBlock;
         BlockSignals.Instance.onPlayerExitBlock += _movementController.OnExitBlock;
+        StackSignals.Instance.onCountChanged += _scoreController.UpdateText;
     }
 
     private void UnsubscribeEvents()
@@ -60,6 +62,7 @@ public class PlayerManager : MonoBehaviour
         StackSignals.Instance.onInteractionCube -= _movementController.OnInteractionBlock;
         BlockSignals.Instance.onBlockBreaked -= _movementController.OnExitBlock;
         BlockSignals.Instance.onPlayerExitBlock -= _movementController.OnExitBlock;
+        StackSignals.Instance.onCountChanged -= _scoreController.UpdateText;
 
 
     }

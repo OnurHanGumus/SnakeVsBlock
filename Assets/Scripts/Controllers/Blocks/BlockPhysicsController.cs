@@ -49,7 +49,6 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 BlockSignals.Instance.onPlayerExitBlock?.Invoke();
-                Debug.Log("triggered");
                 StopAllCoroutines();
             }
         }
@@ -62,14 +61,13 @@ namespace Controllers
                 BlockSignals.Instance.onBlockBreaked?.Invoke();
                 StopAllCoroutines();
             }
-            if (--_targetValue < 0)
+            if (--_targetValue <= 0)
             {
-                CoreGameSignals.Instance.onLevelFailed?.Invoke();
+                StopAllCoroutines();
             }
             yield return new WaitForSeconds(0.5f);
 
             StartCoroutine(StartReduce());
-
         }
     }
 }

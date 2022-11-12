@@ -19,11 +19,19 @@ namespace Commands
         }
         public void Execute()
         {
+            if (_collectableStack.Count <= 1)
+            {
+                CoreGameSignals.Instance.onLevelFailed?.Invoke();
+
+                return;
+            }
             int index = _collectableStack.Count - 1;
             _collectableStack[index].SetActive(false);
             _collectableStack.RemoveAt(index);
             _collectableStack.TrimExcess();
-            Debug.Log("asdasd");
+
+            StackSignals.Instance.onCountChanged?.Invoke(_collectableStack.Count);
+
             //ScoreSignals.Instance.onSetScore?.Invoke(_collectableStack.Count);
 
         }
