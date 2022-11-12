@@ -18,7 +18,7 @@ namespace Managers
         #region Public Variables
         public List<GameObject> CollectableStack = new List<GameObject>();
         public List<GameObject> UnstackList = new List<GameObject>();
-        //public ItemAddOnStackCommand ItemAddOnStack;
+        public ItemAddOnStackCommand ItemAddOnStack;
 
         #endregion
 
@@ -53,7 +53,7 @@ namespace Managers
         {
             _stackMoveController = new StackMoveController();
             _stackMoveController.InisializedController(_stackData);
-            //ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
+            ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
             //_itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack, ref levelHolder);
             //_randomRemoveListItemCommand = new RandomRemoveListItemCommand(ref CollectableStack, ref levelHolder);
             //_stackShackAnimCommand = new StackShackAnimCommand(ref CollectableStack, _stackData);
@@ -74,39 +74,21 @@ namespace Managers
         private void SubscribeEvent()
         {
             //CoreGameSignals.Instance.onReset += OnReset;
-            //StackSignals.Instance.onInteractionCollectable += OnInteractionWithCollectable;
+            StackSignals.Instance.onInteractionCollectable += OnInteractionWithCollectable;
             //StackSignals.Instance.onInteractionObstacle += _itemRemoveOnStackCommand.Execute;
             PlayerSignals.Instance.onSetPlayer += OnSetPlayer;
             CoreGameSignals.Instance.onPlay += OnPlay;
-            //StackSignals.Instance.ColorType += OnGateState;
-            //GunPoolSignals.Instance.onWrongGunPool += _randomRemoveListItemCommand.Execute;
-            //GunPoolSignals.Instance.onGunPoolExit += _dublicateStateItemsCommand.Execute;
-            //DronePoolSignals.Instance.onPlayerCollideWithDronePool += OnPlayerCollideWithDronePool;
-            //DronePoolSignals.Instance.onCollectableCollideWithDronePool += OnStackToUnstack;
-            //DronePoolSignals.Instance.onWrongDronePool += OnWrongDronePoolCollectablesDelete;
-            //DronePoolSignals.Instance.onDroneGone += OnDroneGone;
             //DronePoolSignals.Instance.onGetStackCount += OnGetStackCount;
-            //StackSignals.Instance.onGetCurrentScore += OnGetStackCount;
             //LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
         }
         private void UnSubscribeEvent()
         {
             //CoreGameSignals.Instance.onReset -= OnReset;
-            //StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
+            StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
             //StackSignals.Instance.onInteractionObstacle -= _itemRemoveOnStackCommand.Execute;
             PlayerSignals.Instance.onSetPlayer -= OnSetPlayer;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-
-            //StackSignals.Instance.ColorType -= OnGateState;
-            //GunPoolSignals.Instance.onWrongGunPool -= _randomRemoveListItemCommand.Execute;
-            //GunPoolSignals.Instance.onGunPoolExit -= _dublicateStateItemsCommand.Execute;
-            //DronePoolSignals.Instance.onPlayerCollideWithDronePool -= OnPlayerCollideWithDronePool;
-            //DronePoolSignals.Instance.onCollectableCollideWithDronePool -= OnStackToUnstack;
-            //DronePoolSignals.Instance.onWrongDronePool -= OnWrongDronePoolCollectablesDelete;
-            //DronePoolSignals.Instance.onDroneGone -= OnDroneGone;
             //DronePoolSignals.Instance.onGetStackCount -= OnGetStackCount;
-            //StackSignals.Instance.onGetCurrentScore -= OnGetStackCount;
-            //DronePoolSignals.Instance.onOutlineBorder -= _stackItemBorder.Execute;
             //LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
         }
         private void OnDisable()
@@ -139,12 +121,11 @@ namespace Managers
 
         }
 
-        //private void OnInteractionWithCollectable(GameObject collectableGameObject)
-        //{
-        //    ItemAddOnStack.Execute(collectableGameObject);
-        //    collectableGameObject.tag = "Collected";
-        //    StartCoroutine(_stackShackAnimCommand.Execute());
-        //}
+        private void OnInteractionWithCollectable(GameObject collectableGameObject, int value)
+        {
+            ItemAddOnStack.Execute(value);
+            collectableGameObject.tag = "Collected";
+        }
 
 
 
