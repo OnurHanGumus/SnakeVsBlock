@@ -22,13 +22,14 @@ namespace Managers
         #endregion
 
         #region Seralized Veriables
-        [SerializeField] private GameObject levelHolder;
         #endregion
 
         #region Private Variables
 
         private StackData _stackData;
         private StackMoveController _stackMoveController;
+        private ItemRemoveOnStackCommand _itemRemoveOnStackCommand;
+
 
         private GameObject _playerGameObject;
         private bool _isActive = false;
@@ -52,6 +53,7 @@ namespace Managers
             _stackMoveController = new StackMoveController();
             _stackMoveController.InisializedController(_stackData);
             ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
+            _itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack);
 
             //_itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack, ref levelHolder);
             //_randomRemoveListItemCommand = new RandomRemoveListItemCommand(ref CollectableStack, ref levelHolder);
@@ -73,20 +75,21 @@ namespace Managers
         {
             //CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onInteractionCollectable += OnInteractionWithCollectable;
-            //StackSignals.Instance.onInteractionObstacle += _itemRemoveOnStackCommand.Execute;
+            StackSignals.Instance.onInteractionCube += _itemRemoveOnStackCommand.Execute;
+
             PlayerSignals.Instance.onSetPlayer += OnSetPlayer;
             CoreGameSignals.Instance.onPlay += OnPlay;
-            //DronePoolSignals.Instance.onGetStackCount += OnGetStackCount;
+            StackSignals.Instance.onGetStackCount += OnGetStackCount;
             //LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
         }
         private void UnSubscribeEvent()
         {
             //CoreGameSignals.Instance.onReset -= OnReset;
             StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
-            //StackSignals.Instance.onInteractionObstacle -= _itemRemoveOnStackCommand.Execute;
+            StackSignals.Instance.onInteractionCube -= _itemRemoveOnStackCommand.Execute;
             PlayerSignals.Instance.onSetPlayer -= OnSetPlayer;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            //DronePoolSignals.Instance.onGetStackCount -= OnGetStackCount;
+            StackSignals.Instance.onGetStackCount -= OnGetStackCount;
             //LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
         }
         private void OnDisable()

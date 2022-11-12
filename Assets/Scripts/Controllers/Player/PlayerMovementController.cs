@@ -20,7 +20,7 @@ namespace Controllers
         private PlayerManager _manager;
         private float _xValue;
         private PlayerData _data;
-        private bool _isActive = false;
+        private bool _isActive = false, _isInteractedBlock = false;
 
 
         #endregion
@@ -43,7 +43,14 @@ namespace Controllers
         {
             if (_isActive)
             {
-                _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, _data.SpeedVertical, 0);
+                if (_isInteractedBlock)
+                {
+                    _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, 0, 0);
+                }
+                else
+                {
+                    _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, _data.SpeedVertical, 0);
+                }
             }
         }
 
@@ -59,6 +66,15 @@ namespace Controllers
         public void OnPlay()
         {
             _isActive = true;
+        }
+        public void OnInteractionBlock()
+        {
+            _isInteractedBlock = true;
+            _rig.velocity = Vector2.zero;
+        }
+        public void OnExitBlock()
+        {
+            _isInteractedBlock = false;
         }
     }
 }

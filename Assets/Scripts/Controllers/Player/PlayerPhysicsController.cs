@@ -40,6 +40,11 @@ namespace Controllers
             {
                 //StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
             }
+            else if (other.CompareTag("Cube"))
+            {
+                //StackSignals.Instance.onInteractionCube?.Invoke();
+                //should wait
+            }
         }
     }
 }

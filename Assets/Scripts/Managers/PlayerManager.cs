@@ -48,12 +48,20 @@ public class PlayerManager : MonoBehaviour
     {
         InputSignals.Instance.onInputDragged += _movementController.OnInputDragged;
         CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
+        StackSignals.Instance.onInteractionCube += _movementController.OnInteractionBlock;
+        BlockSignals.Instance.onBlockBreaked += _movementController.OnExitBlock;
+        BlockSignals.Instance.onPlayerExitBlock += _movementController.OnExitBlock;
     }
 
     private void UnsubscribeEvents()
     {
         InputSignals.Instance.onInputDragged -= _movementController.OnInputDragged;
         CoreGameSignals.Instance.onPlay -= _movementController.OnPlay;
+        StackSignals.Instance.onInteractionCube -= _movementController.OnInteractionBlock;
+        BlockSignals.Instance.onBlockBreaked -= _movementController.OnExitBlock;
+        BlockSignals.Instance.onPlayerExitBlock -= _movementController.OnExitBlock;
+
+
     }
 
     private void OnDisable()

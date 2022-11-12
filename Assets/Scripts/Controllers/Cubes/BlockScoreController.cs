@@ -5,18 +5,21 @@ using Keys;
 using Managers;
 using UnityEngine;
 using Signals;
+using System.Collections;
+using TMPro;
 
 namespace Controllers
 {
-    public class CollectablePhysicsController : MonoBehaviour
+    public class BlockScoreController : MonoBehaviour
     {
         #region Self Variables
 
         #region Serialized Variables
-        [SerializeField] private CollectableManager manager;
+        [SerializeField] private TextMeshPro scoreText;
         #endregion
 
         #region Private Variables
+        private BlockManager _manager;
 
 
 
@@ -30,16 +33,12 @@ namespace Controllers
 
         private void Init()
         {
-
+            _manager = GetComponent<BlockManager>();
+            scoreText.text = _manager.Value.ToString();
         }
-
-        private void OnTriggerEnter2D(Collider2D other)
+        public void UpdateText(int value)
         {
-            if (other.CompareTag("Player"))
-            {
-                StackSignals.Instance.onInteractionCollectable?.Invoke(transform.parent.gameObject, manager.Value);
-                transform.parent.gameObject.SetActive(false);
-            }
+            scoreText.text = value.ToString();
         }
     }
 }

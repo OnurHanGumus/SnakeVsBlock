@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Collectable
   - Collected
+  - Cube
   layers:
   - Default
   - TransparentFX

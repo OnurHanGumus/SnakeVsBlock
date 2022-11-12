@@ -10,5 +10,8 @@ namespace Signals
     public class StackSignals : MonoSingleton<StackSignals>
     {
         public UnityAction<GameObject,int> onInteractionCollectable = delegate { };
+        public UnityAction onInteractionCube = delegate { };
+
+        public Func<int> onGetStackCount = delegate { return 0; };
     }
 }
