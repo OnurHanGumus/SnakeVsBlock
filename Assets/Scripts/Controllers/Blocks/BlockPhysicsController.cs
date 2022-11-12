@@ -65,7 +65,7 @@ namespace Controllers
             {
                 StopAllCoroutines();
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
 
             StartCoroutine(StartReduce());
         }
