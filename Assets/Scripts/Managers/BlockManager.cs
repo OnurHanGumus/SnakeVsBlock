@@ -14,12 +14,12 @@ public class BlockManager : MonoBehaviour
     #region Self Variables
 
     #region Public Variables
-    
+
 
 
     #endregion
     #region Serializefield Variables
-
+    [SerializeField] private BlockColorController colorController;
 
     #endregion
     #region Private Variables
@@ -35,7 +35,8 @@ public class BlockManager : MonoBehaviour
         set
         {
             _number = value;
-            _blockScoreController.UpdateText(_number);
+            _blockScoreController.UpdateText(Value);
+            colorController.SetColor(Value);
         }
     }
     #endregion
