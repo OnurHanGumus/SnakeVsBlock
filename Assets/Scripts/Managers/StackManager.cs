@@ -31,16 +31,10 @@ namespace Managers
 
         private StackData _stackData;
         private StackMoveController _stackMoveController;
-        //private ItemRemoveOnStackCommand _itemRemoveOnStackCommand;
-        //private RandomRemoveListItemCommand _randomRemoveListItemCommand;
-        //private StackShackAnimCommand _stackShackAnimCommand;
-        //private InitialzeStackCommand _initialzeStackCommand;
-        //private DublicateStateItemsCommand _dublicateStateItemsCommand;
-        //private StackItemBorder _stackItemBorder;
+
         private GameObject _playerGameObject;
-        //private SetColorState _setColorState;
-        //private Transform _poolTriggerTransform;
-        //private UnstackItemsToStack _unstackItemsToStack;
+        private bool _isActive = false;
+
 
         private Vector3 _direction;
 
@@ -58,7 +52,7 @@ namespace Managers
         private void Init()
         {
             _stackMoveController = new StackMoveController();
-            //_stackMoveController.InisializedController(_stackData);
+            _stackMoveController.InisializedController(_stackData);
             //ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
             //_itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack, ref levelHolder);
             //_randomRemoveListItemCommand = new RandomRemoveListItemCommand(ref CollectableStack, ref levelHolder);
@@ -82,7 +76,8 @@ namespace Managers
             //CoreGameSignals.Instance.onReset += OnReset;
             //StackSignals.Instance.onInteractionCollectable += OnInteractionWithCollectable;
             //StackSignals.Instance.onInteractionObstacle += _itemRemoveOnStackCommand.Execute;
-            //StackSignals.Instance.onPlayerGameObject += OnSetPlayer;
+            PlayerSignals.Instance.onSetPlayer += OnSetPlayer;
+            CoreGameSignals.Instance.onPlay += OnPlay;
             //StackSignals.Instance.ColorType += OnGateState;
             //GunPoolSignals.Instance.onWrongGunPool += _randomRemoveListItemCommand.Execute;
             //GunPoolSignals.Instance.onGunPoolExit += _dublicateStateItemsCommand.Execute;
@@ -99,7 +94,9 @@ namespace Managers
             //CoreGameSignals.Instance.onReset -= OnReset;
             //StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
             //StackSignals.Instance.onInteractionObstacle -= _itemRemoveOnStackCommand.Execute;
-            //StackSignals.Instance.onPlayerGameObject -= OnSetPlayer;
+            PlayerSignals.Instance.onSetPlayer -= OnSetPlayer;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
+
             //StackSignals.Instance.ColorType -= OnGateState;
             //GunPoolSignals.Instance.onWrongGunPool -= _randomRemoveListItemCommand.Execute;
             //GunPoolSignals.Instance.onGunPoolExit -= _dublicateStateItemsCommand.Execute;
@@ -135,10 +132,11 @@ namespace Managers
 
         private void StackMove()
         {
-            if (gameObject.transform.childCount > 0)
+            if (_isActive)
             {
                 _stackMoveController.StackItemsMoveOrigin(_playerGameObject.transform.position, CollectableStack);
             }
+
         }
 
         //private void OnInteractionWithCollectable(GameObject collectableGameObject)
@@ -169,6 +167,11 @@ namespace Managers
         private void OnLevelSuccessful()
         {
            
+        }
+
+        private void OnPlay()
+        {
+            _isActive = true;
         }
     }
 }

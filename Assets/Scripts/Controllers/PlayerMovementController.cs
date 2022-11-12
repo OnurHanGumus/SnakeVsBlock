@@ -20,6 +20,7 @@ namespace Controllers
         private PlayerManager _manager;
         private float _xValue;
         private PlayerData _data;
+        private bool _isActive = false;
 
 
         #endregion
@@ -40,7 +41,10 @@ namespace Controllers
 
         private void FixedUpdate()
         {
-            _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, _data.SpeedHorizontal, 0);
+            if (_isActive)
+            {
+                _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, _data.SpeedVertical, 0);
+            }
         }
 
         public void OnInputDragged(InputParams param)
@@ -51,6 +55,10 @@ namespace Controllers
         public float OnGetPlayerSpeed()
         {
             return _data.SpeedHorizontal;
+        }
+        public void OnPlay()
+        {
+            _isActive = true;
         }
     }
 }

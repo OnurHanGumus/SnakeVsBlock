@@ -37,9 +37,8 @@ namespace Controllers
             for (int i = 1; i < _collectableStack.Count; i++)
             {
                 Vector3 pos = _collectableStack[i - 1].transform.localPosition;
-                pos.z = _collectableStack[i - 1].transform.localPosition.z - _stackData.CollectableOffsetInStack;
                 _collectableStack[i].transform.localPosition = new Vector3(
-                    Mathf.Lerp(_collectableStack[i].transform.localPosition.x, pos.x, _stackData.LerpSpeed_x), _collectableStack[i].transform.localPosition.y, 0);
+                    Mathf.Lerp(_collectableStack[i].transform.localPosition.x, pos.x, _stackData.LerpSpeed_x), _collectableStack[i - 1].transform.localPosition.y - (_stackData.CollectableOffsetInStack), 0);
             }
         }
     }

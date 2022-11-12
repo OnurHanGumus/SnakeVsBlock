@@ -34,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     private void Init()
     {
         _movementController = GetComponent<PlayerMovementController>();
+
     }
     public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
@@ -46,15 +47,23 @@ public class PlayerManager : MonoBehaviour
     private void SubscribeEvents()
     {
         InputSignals.Instance.onInputDragged += _movementController.OnInputDragged;
+        CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
     }
 
     private void UnsubscribeEvents()
     {
         InputSignals.Instance.onInputDragged -= _movementController.OnInputDragged;
+        CoreGameSignals.Instance.onPlay -= _movementController.OnPlay;
     }
 
     private void OnDisable()
     {
         UnsubscribeEvents();
+    }
+
+    private void Start()
+    {
+        PlayerSignals.Instance.onSetPlayer?.Invoke(gameObject);
+
     }
 }
