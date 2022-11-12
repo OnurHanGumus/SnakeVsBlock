@@ -49,21 +49,27 @@ public class PlayerManager : MonoBehaviour
     {
         InputSignals.Instance.onInputDragged += _movementController.OnInputDragged;
         CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
+        CoreGameSignals.Instance.onRestartLevel += _movementController.OnRestartLevel;
         StackSignals.Instance.onInteractionCube += _movementController.OnInteractionBlock;
         BlockSignals.Instance.onBlockBreaked += _movementController.OnExitBlock;
         BlockSignals.Instance.onPlayerExitBlock += _movementController.OnExitBlock;
         StackSignals.Instance.onCountChanged += _scoreController.UpdateText;
+
+        PlayerSignals.Instance.onGetPlayer += OnGetPlayer;
+
     }
 
     private void UnsubscribeEvents()
     {
         InputSignals.Instance.onInputDragged -= _movementController.OnInputDragged;
         CoreGameSignals.Instance.onPlay -= _movementController.OnPlay;
+        CoreGameSignals.Instance.onRestartLevel -= _movementController.OnRestartLevel;
         StackSignals.Instance.onInteractionCube -= _movementController.OnInteractionBlock;
         BlockSignals.Instance.onBlockBreaked -= _movementController.OnExitBlock;
         BlockSignals.Instance.onPlayerExitBlock -= _movementController.OnExitBlock;
         StackSignals.Instance.onCountChanged -= _scoreController.UpdateText;
 
+        PlayerSignals.Instance.onGetPlayer -= OnGetPlayer;
 
     }
 
@@ -72,9 +78,10 @@ public class PlayerManager : MonoBehaviour
         UnsubscribeEvents();
     }
 
-    private void Start()
+    private GameObject OnGetPlayer()
     {
-        PlayerSignals.Instance.onSetPlayer?.Invoke(gameObject);
-
+        return gameObject;
     }
+
+
 }

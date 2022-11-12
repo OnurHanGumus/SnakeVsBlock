@@ -48,49 +48,37 @@ namespace Managers
 
         private void Init()
         {
+            _playerGameObject = PlayerSignals.Instance.onGetPlayer();
+            CollectableStack.Add(_playerGameObject);
             _stackData = GetStackData();
-
             _stackMoveController = new StackMoveController();
             _stackMoveController.InisializedController(_stackData);
             ItemAddOnStack = new ItemAddOnStackCommand(ref CollectableStack, transform, _stackData);
             _itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack);
-
-            //_itemRemoveOnStackCommand = new ItemRemoveOnStackCommand(ref CollectableStack, ref levelHolder);
-            //_randomRemoveListItemCommand = new RandomRemoveListItemCommand(ref CollectableStack, ref levelHolder);
-            //_stackShackAnimCommand = new StackShackAnimCommand(ref CollectableStack, _stackData);
-            //_setColorState = new SetColorState(ref CollectableStack);
-            //_dublicateStateItemsCommand = new DublicateStateItemsCommand(ref CollectableStack, ref ItemAddOnStack);
-            //_stackItemBorder = new StackItemBorder(ref UnstackList);
-            //_unstackItemsToStack = new UnstackItemsToStack(ref CollectableStack, ref UnstackList, ref _dublicateStateItemsCommand, gameObject);
         }
 
         #region Event Subscription
         private void OnEnable()
         {
             SubscribeEvent();
-            //_initialzeStackCommand.Execute(_stackData.InitialStackItem);
         }
 
         private void SubscribeEvent()
         {
-            //CoreGameSignals.Instance.onReset += OnReset;
             StackSignals.Instance.onInteractionCollectable += OnInteractionWithCollectable;
             StackSignals.Instance.onInteractionCube += _itemRemoveOnStackCommand.Execute;
-
-            PlayerSignals.Instance.onSetPlayer += OnSetPlayer;
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             StackSignals.Instance.onGetStackCount += OnGetStackCount;
-            //LevelSignals.Instance.onLevelSuccessful += OnLevelSuccessful;
+
         }
         private void UnSubscribeEvent()
         {
-            //CoreGameSignals.Instance.onReset -= OnReset;
             StackSignals.Instance.onInteractionCollectable -= OnInteractionWithCollectable;
             StackSignals.Instance.onInteractionCube -= _itemRemoveOnStackCommand.Execute;
-            PlayerSignals.Instance.onSetPlayer -= OnSetPlayer;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             StackSignals.Instance.onGetStackCount -= OnGetStackCount;
-            //LevelSignals.Instance.onLevelSuccessful -= OnLevelSuccessful;
         }
         private void OnDisable()
         {
@@ -98,19 +86,10 @@ namespace Managers
         }
         #endregion
 
-        private void Start()
-        {
-            ItemAddOnStack.Execute(_stackData.InitializeStackAmount);
-        }
 
         private void Update()
         {
             StackMove();
-        }
-
-        private void OnSetPlayer(GameObject player)
-        {
-            _playerGameObject = player;
         }
 
         private void StackMove()
@@ -119,7 +98,6 @@ namespace Managers
             {
                 _stackMoveController.StackItemsMoveOrigin(_playerGameObject.transform.position, CollectableStack);
             }
-
         }
 
         private void OnInteractionWithCollectable(GameObject collectableGameObject, int value)
@@ -128,32 +106,35 @@ namespace Managers
             collectableGameObject.tag = "Collected";
         }
 
+        private void InitializeStack()
+        {
+            ItemAddOnStack.Execute(_stackData.InitializeStackAmount);
+        }
 
-
-        //private void OnReset()
-        //{
-        //    foreach (Transform childs in transform)
-        //    {
-        //        Destroy(childs.gameObject);
-        //    }
-        //    CollectableStack.Clear();
-        //    _initialzeStackCommand.Execute(_stackData.InitialStackItem);
-        //}
-
-
+        private void Start()
+        {
+            InitializeStack();
+        }
         private int OnGetStackCount()
         {
             return CollectableStack.Count;
         }
 
-        private void OnLevelSuccessful()
-        {
-           
-        }
-
         private void OnPlay()
         {
             _isActive = true;
+        }
+
+        private void OnRestartLevel()
+        {
+            for (int i = 1; i < CollectableStack.Count; i++)
+            {
+                CollectableStack[i].SetActive(false);
+            }
+
+            CollectableStack.Clear();
+            CollectableStack.Add(_playerGameObject);
+            InitializeStack();
         }
     }
 }

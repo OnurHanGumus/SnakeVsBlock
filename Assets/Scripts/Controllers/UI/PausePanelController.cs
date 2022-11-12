@@ -13,10 +13,12 @@ public class PausePanelController : MonoBehaviour
     }
     public void MainMenuBtn()
     {
+        Time.timeScale = 1f;
+
         UISignals.Instance.onClosePanel?.Invoke(UIPanels.PausePanel);
         UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
         UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-        Time.timeScale = 1f;
+        CoreGameSignals.Instance.onRestartLevel?.Invoke();
 
     }
     public void ExitBtn()

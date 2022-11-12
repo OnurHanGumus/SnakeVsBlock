@@ -9,7 +9,7 @@ namespace Signals
 {
     public class PlayerSignals : MonoSingleton<PlayerSignals>
     {
-        public UnityAction<GameObject> onSetPlayer = delegate { };
+        public Func<GameObject> onGetPlayer = delegate { return null; };
 
     }
 }

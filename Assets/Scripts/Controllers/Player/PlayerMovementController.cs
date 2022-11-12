@@ -43,12 +43,6 @@ namespace Controllers
         {
             ClampControl();
 
-            //if ((_xValue > 0f && transform.position.x >= _data.MaxHorizontalPoint) || (_xValue < 0f && transform.position.x <= _data.MaxHorizontalPoint))
-            //{
-            //    _rig.velocity = new Vector3(0, _data.SpeedVertical, 0);
-            //    return;
-            //}
-
             if (_isActive)
             {
                 if (_isInteractedBlock)
@@ -60,11 +54,6 @@ namespace Controllers
                     _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, _data.SpeedVertical, 0);
                 }
             }
-
-
-            //Vector3 position;
-            //position = new Vector2(Mathf.Clamp(_rig.position.x, -_data.MaxHorizontalPoint, _data.MaxHorizontalPoint), (position = _rig.position).y);
-            //_rig.position = position;
         }
 
         private void ClampControl()
@@ -97,5 +86,13 @@ namespace Controllers
         {
             _isInteractedBlock = false;
         }
+        public void OnRestartLevel()
+        {
+            _rig.velocity = Vector3.zero;
+            _isActive = false;
+            transform.position = Vector3.zero;
+
+        }
+
     }
 }

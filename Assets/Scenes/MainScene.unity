@@ -2031,11 +2031,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626358707}
   m_CullTransparentMesh: 0
---- !u!1 &645980459 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1495296539359178720, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
-  m_PrefabInstance: {fileID: 1495296538729975499}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &645980460 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1495296539359178727, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
@@ -2789,8 +2784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d593c4a7f6d825a45b20650ff5faaee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CollectableStack:
-  - {fileID: 645980459}
+  CollectableStack: []
 --- !u!1 &961375472
 GameObject:
   m_ObjectHideFlags: 0
