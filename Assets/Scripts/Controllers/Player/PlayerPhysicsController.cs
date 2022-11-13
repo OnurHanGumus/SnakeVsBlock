@@ -19,8 +19,6 @@ namespace Controllers
         #region Private Variables
         private PlayerManager _manager;
 
-
-
         #endregion
         #endregion
 
@@ -38,12 +36,11 @@ namespace Controllers
         {
             if (other.CompareTag("Collectable"))
             {
-                //StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
+
             }
             else if (other.CompareTag("Block"))
             {
-                //StackSignals.Instance.onInteractionCube?.Invoke();
-                //should wait
+                
             }
         }
     }

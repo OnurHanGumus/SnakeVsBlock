@@ -16,7 +16,6 @@ namespace Controllers
         private CollectableManager _manager;
 
 
-
         #endregion
         #endregion
 

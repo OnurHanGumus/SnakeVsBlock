@@ -25,6 +25,4 @@ public class PausePanelController : MonoBehaviour
     {
         Application.Quit();
     }
-
-
 }

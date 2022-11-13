@@ -30,7 +30,6 @@ public class LevelPanelController : MonoBehaviour
 
 
     }
-
     public void OnScoreUpdateText(ScoreTypeEnums type, int score)
     {
         if (type.Equals(ScoreTypeEnums.Score))
@@ -43,9 +42,4 @@ public class LevelPanelController : MonoBehaviour
     {
         scoreTxt.text = 0.ToString();
     }
-
-    
-
-
-   
 }

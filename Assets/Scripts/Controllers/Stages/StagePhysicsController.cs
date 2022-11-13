@@ -18,8 +18,6 @@ namespace Controllers
 
         #region Private Variables
 
-
-
         #endregion
         #endregion
 
@@ -38,7 +36,6 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onNextLevel?.Invoke();
             }
-
         }
         private void OnTriggerExit2D(Collider2D other)
         {
@@ -46,7 +43,6 @@ namespace Controllers
             {
                 transform.parent.gameObject.SetActive(false);
             }
-
         }
     }
 }

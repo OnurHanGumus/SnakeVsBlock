@@ -27,9 +27,6 @@ namespace Controllers
                 return;
             }
 
-            float directx = Mathf.Lerp(_collectableStack[0].transform.localPosition.x, direction.x, _stackData.LerpSpeed_x);
-            //_collectableStack[0].transform.localPosition = new Vector3(directx, _collectableStack[0].transform.localPosition.y, 0);
-
             StackItemsLerpMove(_collectableStack);
         }
 

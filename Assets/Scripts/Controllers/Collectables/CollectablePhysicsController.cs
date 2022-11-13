@@ -18,8 +18,6 @@ namespace Controllers
 
         #region Private Variables
 
-
-
         #endregion
         #endregion
 
@@ -27,12 +25,10 @@ namespace Controllers
         {
             Init();
         }
-
         private void Init()
         {
 
         }
-
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
