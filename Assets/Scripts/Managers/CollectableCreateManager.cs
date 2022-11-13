@@ -66,7 +66,7 @@ public class CollectableCreateManager : MonoBehaviour
     }
     private void OnCreateCollectable()
     {
-        GameObject tmp = PoolSignals.Instance.onGetCollectableFromPool();
+        GameObject tmp = PoolSignals.Instance.onGetObject(PoolEnums.Collectable);
         tmp.SetActive(true);
         tmp.transform.position = new Vector3(Random.Range(-2,3), _playerTransform.position.y + 10);
     }

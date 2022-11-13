@@ -14,13 +14,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private GameObject stagePrefab;
     [SerializeField] private GameObject snakeBodyPrefab;
 
-
-
-    [SerializeField] private List<GameObject> collectablePool;
-    [SerializeField] private List<GameObject> stagePool;
-    [SerializeField] private List<GameObject> snakeBodyPool;
-
-
+    [SerializeField] private Dictionary<PoolEnums, List<GameObject>> poolDictionary;
 
 
     [SerializeField] private int amountCollectables = 50;
@@ -41,10 +35,10 @@ public class PoolManager : MonoBehaviour
     private void Init()
     {
         _levelId = LevelSignals.Instance.onGetCurrentModdedLevel();
-        InitializeCollectablePool();
-        InitializeStagePool();
-        InitializeSnakeBodyPool();
-        //InitializeBulletPool();
+        poolDictionary = new Dictionary<PoolEnums, List<GameObject>>();
+        InitializePool(PoolEnums.Collectable, collectablePrefab, amountCollectables);
+        InitializePool(PoolEnums.SnakeBody, snakeBodyPrefab, amountSnakeBodys);
+        InitializePool(PoolEnums.Stage, stagePrefab, amountStages);
     }
 
 
@@ -61,31 +55,16 @@ public class PoolManager : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        PoolSignals.Instance.onGetCollectableFromPool += OnGetCollectable;
-        PoolSignals.Instance.onGetStageFromPool += OnGetStage;
-        PoolSignals.Instance.onGetSnakeBodyFromPool += OnGetSnakeBody;
-
-
-
         PoolSignals.Instance.onGetPoolManagerObj += OnGetPoolManagerObj;
-
-
-        //PlayerSignals.Instance.onPlayerSelectGun += OnPlayerSelectGun;
+        PoolSignals.Instance.onGetObject += OnGetObject;
         CoreGameSignals.Instance.onRestartLevel += OnReset;
 
     }
 
     private void UnsubscribeEvents()
     {
-        PoolSignals.Instance.onGetCollectableFromPool -= OnGetCollectable;
-        PoolSignals.Instance.onGetStageFromPool -= OnGetStage;
-        PoolSignals.Instance.onGetSnakeBodyFromPool -= OnGetSnakeBody;
-
-
         PoolSignals.Instance.onGetPoolManagerObj -= OnGetPoolManagerObj;
-
-
-        //PlayerSignals.Instance.onPlayerSelectGun -= OnPlayerSelectGun;
+        PoolSignals.Instance.onGetObject -= OnGetObject;
         CoreGameSignals.Instance.onRestartLevel -= OnReset;
 
     }
@@ -97,79 +76,32 @@ public class PoolManager : MonoBehaviour
 
     #endregion
 
-
-    private void InitializeCollectablePool()
+    private void InitializePool(PoolEnums type, GameObject prefab, int size)
     {
-        collectablePool = new List<GameObject>();
+        List<GameObject> tempList = new List<GameObject>();
         GameObject tmp;
-        for (int i = 0; i < amountCollectables; i++)
-        {
-            tmp = Instantiate(collectablePrefab, transform);
-            tmp.SetActive(false);
-            collectablePool.Add(tmp);
-        }
-    }
 
-    private void InitializeStagePool()
-    {
-        stagePool = new List<GameObject>();
-        GameObject tmp;
-        for (int i = 0; i < amountStages; i++)
+        for (int i = 0; i < size; i++)
         {
-            tmp = Instantiate(stagePrefab, transform);
+            tmp = Instantiate(prefab, transform);
             tmp.SetActive(false);
-            stagePool.Add(tmp);
+            tempList.Add(tmp);
         }
+        poolDictionary.Add(type, tempList);
     }
-
-    private void InitializeSnakeBodyPool()
+    
+    public GameObject OnGetObject(PoolEnums type)
     {
-        snakeBodyPool = new List<GameObject>();
-        GameObject tmp;
-        for (int i = 0; i < amountSnakeBodys; i++)
+        for (int i = 0; i < poolDictionary[type].Count; i++)
         {
-            tmp = Instantiate(snakeBodyPrefab, transform);
-            tmp.SetActive(false);
-            snakeBodyPool.Add(tmp);
-        }
-    }
-
-    public GameObject OnGetCollectable()
-    {
-        for (int i = 0; i < amountCollectables; i++)
-        {
-            if (!collectablePool[i].activeInHierarchy)
+            if (!poolDictionary[type][i].activeInHierarchy)
             {
-                return collectablePool[i];
+                return poolDictionary[type][i];
             }
         }
         return null;
     }
 
-    public GameObject OnGetStage()
-    {
-        for (int i = 0; i < amountStages; i++)
-        {
-            if (!stagePool[i].activeInHierarchy)
-            {
-                return stagePool[i];
-            }
-        }
-        return null;
-    }
-
-
-    public GameObject OnGetSnakeBody()
-    {
-        for (int i = 0; i < amountSnakeBodys; i++)
-        {
-            if (!snakeBodyPool[i].activeInHierarchy)
-            {
-                return snakeBodyPool[i];
-            }
-        }
-        return null;
-    }
     public Transform OnGetPoolManagerObj()
     {
         return transform;
@@ -179,7 +111,7 @@ public class PoolManager : MonoBehaviour
     private void OnReset()
     {
         //reset
-        foreach (var i in stagePool)
+        foreach (var i in poolDictionary[PoolEnums.Stage])
         {
             i.transform.position = new Vector3(0, 6.88f, 0);
         }

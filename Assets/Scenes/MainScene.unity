@@ -2399,9 +2399,6 @@ MonoBehaviour:
   collectablePrefab: {fileID: 5825655614934560320, guid: fb6341230b0ddc3439b8570230d94903, type: 3}
   stagePrefab: {fileID: 4712012778121536318, guid: 22f43a0eda06d3f46b94b884b5dfd0e8, type: 3}
   snakeBodyPrefab: {fileID: 8876440934614123116, guid: d520462edd73ad649b4b1a01e2b296ef, type: 3}
-  collectablePool: []
-  stagePool: []
-  snakeBodyPool: []
   amountCollectables: 50
   amountStages: 3
   amountSnakeBodys: 50
