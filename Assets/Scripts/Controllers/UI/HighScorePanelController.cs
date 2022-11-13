@@ -17,12 +17,12 @@ public class HighScorePanelController : MonoBehaviour
     #endregion
     private void Start()
     {
-        UpdateText();
+        InitializeText();
     }
 
-    private void UpdateText()
+    private void InitializeText()
     {
-        int score = SaveSignals.Instance.onGetScore(SaveLoadStates.Score,SaveFiles.SaveFile);
+        int score = SaveSignals.Instance.onGetScore(SaveLoadStates.Score, SaveFiles.SaveFile);
         highScoreTxt.text = "High Score: " + score.ToString();
     }
 
@@ -30,5 +30,10 @@ public class HighScorePanelController : MonoBehaviour
     {
         UISignals.Instance.onClosePanel?.Invoke(UIPanels.HighScorePanel);
         UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
+    }
+
+    public void OnUpdateText(int newValue)
+    {
+        highScoreTxt.text = "High Score: " + newValue.ToString();
     }
 }

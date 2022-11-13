@@ -8,7 +8,6 @@ namespace Signals
 {
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-        public UnityAction onSaveAndResetGameData = delegate { };
         public UnityAction onLevelInitialize = delegate { };
         public UnityAction onClearActiveLevel = delegate { };
         public UnityAction onLevelFailed = delegate { };

@@ -31,9 +31,6 @@ namespace Commands
             _collectableStack.TrimExcess();
 
             StackSignals.Instance.onCountChanged?.Invoke(_collectableStack.Count);
-
-            //ScoreSignals.Instance.onSetScore?.Invoke(_collectableStack.Count);
-
         }
     }
 }

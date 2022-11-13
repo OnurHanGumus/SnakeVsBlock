@@ -60,6 +60,7 @@ namespace Controllers
         private IEnumerator StartReduce()
         {
             StackSignals.Instance.onInteractionCube?.Invoke();
+            ScoreSignals.Instance.onScoreIncrease?.Invoke(ScoreTypeEnums.Score, 1);
             if (--manager.Value <= 0)
             {
                 BlockSignals.Instance.onBlockBreaked?.Invoke();

@@ -28,25 +28,6 @@ namespace Managers
         #endregion
 
         #region Private Variables
-        private int _money = 0;
-        private int _gem = 0;
-
-        [ShowInInspector]
-        public int Money
-        {
-            get { return _money; }
-            set
-            {
-                _money = value;
-
-            }
-        }
-        [ShowInInspector]
-        public int Gem
-        {
-            get { return _gem; }
-            set { _gem = value; }
-        }
 
         private int _score;
         [ShowInInspector]
@@ -80,20 +61,16 @@ namespace Managers
         {
             ScoreSignals.Instance.onScoreIncrease += OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease += OnScoreDecrease;
-
             ScoreSignals.Instance.onGetScore += OnGetScore;
-
-
+            CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
         }
 
         private void UnsubscribeEvents()
         {
             ScoreSignals.Instance.onScoreIncrease -= OnScoreIncrease;
             ScoreSignals.Instance.onScoreDecrease -= OnScoreDecrease;
-
             ScoreSignals.Instance.onGetScore -= OnGetScore;
-
-
+            CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
         }
 
         private void OnDisable()
@@ -105,42 +82,24 @@ namespace Managers
 
         private void OnScoreIncrease(ScoreTypeEnums type, int amount)
         {
-            //if (type.Equals(ScoreTypeEnums.Money))
-            //{
-            //    _money += amount;
-            //    UISignals.Instance.onSetChangedText?.Invoke(type, _money);
-            //    SaveSignals.Instance.onSaveCollectables?.Invoke(_money, SaveLoadStates.Money, SaveFiles.SaveFile);
-
-            //}
-            //else
-            //{
-            //    _gem += amount;
-            //    UISignals.Instance.onSetChangedText?.Invoke(type, _gem);
-            //    SaveSignals.Instance.onSaveCollectables?.Invoke(_gem, SaveLoadStates.Gem, SaveFiles.SaveFile);
-            //}
+            Score += amount;
+            UISignals.Instance.onSetChangedText?.Invoke(type, Score);  
         }
 
         private void OnScoreDecrease(ScoreTypeEnums type, int amount)
         {
-            //if (type.Equals(ScoreTypeEnums.Money))
-            //{
-            //    _money -= amount;
-            //    UISignals.Instance.onSetChangedText?.Invoke(type, _money);
-            //    SaveSignals.Instance.onSaveCollectables?.Invoke(_money, SaveLoadStates.Money, SaveFiles.SaveFile);
 
-            //}
-            //else
-            //{
-            //    _gem -= amount;
-            //    UISignals.Instance.onSetChangedText?.Invoke(type, _gem);
-            //    SaveSignals.Instance.onSaveCollectables?.Invoke(_gem, SaveLoadStates.Gem, SaveFiles.SaveFile);
-            //}
         }
 
 
         private int OnGetScore()
         {
             return Score;
+        }
+
+        private void OnRestartLevel()
+        {
+            Score = 0;
         }
     }
 }

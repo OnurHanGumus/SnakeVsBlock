@@ -56,7 +56,8 @@ public class GameOverPanelController : MonoBehaviour
             failPanel.SetActive(false);
             scoreTxt.text = "High Score: " + temp;
             _highScore = temp;
-            SaveSignals.Instance.onSaveScore?.Invoke(temp,SaveLoadStates.Score,SaveFiles.SaveFile);
+            ScoreSignals.Instance.onHighScoreChanged?.Invoke(_highScore);
+            SaveSignals.Instance.onSaveScore?.Invoke(temp,SaveLoadStates.Score, SaveFiles.SaveFile);
         }
         else
         {
