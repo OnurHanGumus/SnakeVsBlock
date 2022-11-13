@@ -38,6 +38,7 @@ public class CollectableCreateManager : MonoBehaviour
     private void Start()
     {
         _playerTransform = PlayerSignals.Instance.onGetPlayer().transform;
+        CreateCollectables(Random.Range(2, 8));
         OnCreateCollectable();
 
     }
@@ -64,11 +65,17 @@ public class CollectableCreateManager : MonoBehaviour
     {
         UnsubscribeEvents();
     }
+
     private void OnCreateCollectable()
+    {
+        CreateCollectables(10);
+    }
+
+    private void CreateCollectables(int yPos)
     {
         GameObject tmp = PoolSignals.Instance.onGetObject(PoolEnums.Collectable);
         tmp.SetActive(true);
-        tmp.transform.position = new Vector3(Random.Range(-2,3), _playerTransform.position.y + 10);
+        tmp.transform.position = new Vector3(Random.Range(-2, 3), _playerTransform.position.y + yPos);
     }
 
 

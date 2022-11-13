@@ -40,7 +40,7 @@ namespace Controllers
             {
                 //StackSignals.Instance.onInteractionCollectable?.Invoke(other.transform.parent.gameObject);
             }
-            else if (other.CompareTag("Cube"))
+            else if (other.CompareTag("Block"))
             {
                 //StackSignals.Instance.onInteractionCube?.Invoke();
                 //should wait

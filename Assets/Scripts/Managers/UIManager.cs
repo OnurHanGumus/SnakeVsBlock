@@ -75,8 +75,7 @@ namespace Managers
 
         private void OnLevelSuccessful()
         {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.WinPanel);
+            
         }
 
         public void Play()

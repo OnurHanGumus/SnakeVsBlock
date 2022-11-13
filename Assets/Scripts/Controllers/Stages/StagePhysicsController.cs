@@ -36,9 +36,7 @@ namespace Controllers
         {
             if (other.CompareTag("Player"))
             {
-                GameObject temp = PoolSignals.Instance.onGetObject?.Invoke(PoolEnums.Stage);
-                temp.transform.position = new Vector3(transform.position.x, transform.position.y + 10);
-                temp.SetActive(true);
+                CoreGameSignals.Instance.onNextLevel?.Invoke();
             }
 
         }

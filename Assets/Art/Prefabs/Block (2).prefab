@@ -335,6 +335,9 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 16777215
   manager: {fileID: 6613380568304980732}
+  _data:
+    Multiplier: 16
+    ColorRanks: 100000002100000032000000
 --- !u!1 &7665534003895482606
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +351,7 @@ GameObject:
   - component: {fileID: 1017214540298190500}
   m_Layer: 0
   m_Name: Physics
-  m_TagString: Cube
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

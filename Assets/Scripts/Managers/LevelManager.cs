@@ -8,6 +8,7 @@ using Keys;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -62,6 +63,7 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID += OnGetLevelID;
+            CoreGameSignals.Instance.onPlay += OnPlay;
 
         }
 
@@ -74,6 +76,7 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
             CoreGameSignals.Instance.onRestartLevel -= OnRestartLevel;
             CoreGameSignals.Instance.onGetLevelID -= OnGetLevelID;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
 
         }
 
@@ -84,7 +87,7 @@ namespace Managers
 
         #endregion
 
-        private void Start()
+        private void OnPlay()
         {
             OnInitializeLevel();
         }
@@ -92,18 +95,12 @@ namespace Managers
         private void OnNextLevel()
         {
             _levelID++;
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onSaveAndResetGameData?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            OnInitializeLevel();
         }
 
         private void OnRestartLevel()
         {
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onReset?.Invoke();
-            CoreGameSignals.Instance.onSaveAndResetGameData?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+            _levelID = 0;
         }
 
         private int OnGetLevelID()
@@ -114,11 +111,35 @@ namespace Managers
 
         private void OnInitializeLevel()
         {
-            UnityEngine.Object[] Levels = Resources.LoadAll("Levels");
-            int newLevelId = _levelID % Levels.Length;
-            levelLoader.InitializeLevel((GameObject)Levels[newLevelId], levelHolder.transform);
+            InitializeStage();
         }
 
+        private void InitializeStage()
+        {
+
+            GameObject temp = PoolSignals.Instance.onGetObject?.Invoke(PoolEnums.Stage);
+            temp.transform.position = new Vector3(transform.position.x, (_levelID + 1) * 10);
+            temp.SetActive(true);
+
+            int tempInt = Random.Range(1, 5);
+            for (int i = 0; i < tempInt; i++)
+            {
+                temp = PoolSignals.Instance.onGetObject(PoolEnums.Collectable);
+                temp.SetActive(true);
+                temp.transform.position = new Vector3(Random.Range(-2.3f, 2.3f), (_levelID + 1) * 10 + Random.Range(1f, 9f));
+            }
+
+            tempInt = Random.Range(0, 3);
+            for (int i = 0; i < tempInt; i++)
+            {
+                temp = PoolSignals.Instance.onGetObject(PoolEnums.Blocks);
+                temp.SetActive(true);
+                temp.transform.position = new Vector3(Random.Range(-2, 3), (_levelID + 1) * 10 + Random.Range(1, 9));
+            }
+
+        }
+
+        
         private void OnClearActiveLevel()
         {
             levelClearer.ClearActiveLevel(levelHolder.transform);

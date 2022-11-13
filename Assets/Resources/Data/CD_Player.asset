@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     SpeedHorizontal: 7
-    SpeedVertical: 1
+    SpeedVertical: 3
+    MaxHorizontalPoint: 2.38

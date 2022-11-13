@@ -13,6 +13,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private GameObject collectablePrefab;
     [SerializeField] private GameObject stagePrefab;
     [SerializeField] private GameObject snakeBodyPrefab;
+    [SerializeField] private GameObject blockPrefab;
 
     [SerializeField] private Dictionary<PoolEnums, List<GameObject>> poolDictionary;
 
@@ -20,6 +21,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private int amountCollectables = 50;
     [SerializeField] private int amountStages = 3;
     [SerializeField] private int amountSnakeBodys = 30;
+    [SerializeField] private int amountBlocks = 10;
 
 
 
@@ -39,15 +41,13 @@ public class PoolManager : MonoBehaviour
         InitializePool(PoolEnums.Collectable, collectablePrefab, amountCollectables);
         InitializePool(PoolEnums.SnakeBody, snakeBodyPrefab, amountSnakeBodys);
         InitializePool(PoolEnums.Stage, stagePrefab, amountStages);
+        InitializePool(PoolEnums.Blocks, blockPrefab, amountBlocks);
     }
 
 
 
     #region Event Subscriptions
-    void Start()
-    {
 
-    }
     private void OnEnable()
     {
         SubscribeEvents();
@@ -111,9 +111,17 @@ public class PoolManager : MonoBehaviour
     private void OnReset()
     {
         //reset
-        foreach (var i in poolDictionary[PoolEnums.Stage])
+        ResetPool(PoolEnums.Collectable);
+        ResetPool(PoolEnums.SnakeBody);
+        ResetPool(PoolEnums.Stage);
+        ResetPool(PoolEnums.Blocks);
+    }
+
+    private void ResetPool(PoolEnums type)
+    {
+        foreach (var i in poolDictionary[type])
         {
-            i.transform.position = new Vector3(0, 6.88f, 0);
+            i.SetActive(false);
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Enums
         Collectable,
         SnakeBody,
         Stage,
-        Barrier,
+        Blocks,
     }
 }

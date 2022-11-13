@@ -43,6 +43,10 @@ namespace Controllers
                 _targetValue = StackSignals.Instance.onGetStackCount();
                 StartCoroutine(StartReduce());
             }
+            else if (other.CompareTag("Block"))
+            {
+                transform.parent.gameObject.SetActive(false);
+            }
         }
         private void OnTriggerExit2D(Collider2D other)
         {
