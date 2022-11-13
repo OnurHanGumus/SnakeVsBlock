@@ -51,6 +51,7 @@ public class BlockManager : MonoBehaviour
     {
         _data = GetBlockData();
         _blockScoreController = GetComponent<BlockScoreController>();
+
     }
     public BlockColorData GetColorData() => Resources.Load<CD_BlockColor>("Data/CD_BlockColor").Data;
     public BlockData GetBlockData() => Resources.Load<CD_BlockData>("Data/CD_BlockData").Data;
@@ -62,8 +63,7 @@ public class BlockManager : MonoBehaviour
 
     private void Start()
     {
-        SetRandomNumber();
-
+        //SetRandomNumber();
     }
 
 
@@ -87,5 +87,9 @@ public class BlockManager : MonoBehaviour
     private void SetRandomNumber()
     {
         Value = Random.Range(_data.ValueMin, _data.ValueMax);
+    }
+    public void SetAsLowNumberedBlock()
+    {
+        Value = Random.Range(_data.Sizes[1].ValueMin, _data.Sizes[1].ValueMax);
     }
 }

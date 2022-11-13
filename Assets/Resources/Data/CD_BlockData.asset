@@ -16,3 +16,12 @@ MonoBehaviour:
     BreakTime: 0.1
     ValueMin: 1
     ValueMax: 50
+    Sizes:
+    - ValueMin: 1
+      ValueMax: 5
+    - ValueMin: 1
+      ValueMax: 15
+    - ValueMin: 16
+      ValueMax: 30
+    - ValueMin: 31
+      ValueMax: 50

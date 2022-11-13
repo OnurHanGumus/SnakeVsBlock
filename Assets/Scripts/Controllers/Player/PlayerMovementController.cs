@@ -94,5 +94,10 @@ namespace Controllers
 
         }
 
+        public void OnLevelFailed()
+        {
+            _isActive = false;
+        }
+
     }
 }

@@ -50,6 +50,7 @@ public class PlayerManager : MonoBehaviour
         InputSignals.Instance.onInputDragged += _movementController.OnInputDragged;
         CoreGameSignals.Instance.onPlay += _movementController.OnPlay;
         CoreGameSignals.Instance.onRestartLevel += _movementController.OnRestartLevel;
+        CoreGameSignals.Instance.onLevelFailed += _movementController.OnLevelFailed;
         StackSignals.Instance.onInteractionCube += _movementController.OnInteractionBlock;
         BlockSignals.Instance.onBlockBreaked += _movementController.OnExitBlock;
         BlockSignals.Instance.onPlayerExitBlock += _movementController.OnExitBlock;
@@ -64,6 +65,7 @@ public class PlayerManager : MonoBehaviour
         InputSignals.Instance.onInputDragged -= _movementController.OnInputDragged;
         CoreGameSignals.Instance.onPlay -= _movementController.OnPlay;
         CoreGameSignals.Instance.onRestartLevel -= _movementController.OnRestartLevel;
+        CoreGameSignals.Instance.onLevelFailed -= _movementController.OnLevelFailed;
         StackSignals.Instance.onInteractionCube -= _movementController.OnInteractionBlock;
         BlockSignals.Instance.onBlockBreaked -= _movementController.OnExitBlock;
         BlockSignals.Instance.onPlayerExitBlock -= _movementController.OnExitBlock;

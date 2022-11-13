@@ -10,6 +10,7 @@ using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Enums;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -23,7 +24,7 @@ namespace Managers
         #endregion
 
         #region Serialized Variables
-        [SerializeField] private List<GameObject> childs;
+        [SerializeField] private List<BlockManager> childs;
 
         #endregion
 
@@ -40,7 +41,6 @@ namespace Managers
         }
         private void Init()
         {
-
         }
         #region Event Subscription
 
@@ -48,6 +48,11 @@ namespace Managers
         {
             SubscribeEvents();
             ActivateChildrens();
+
+        }
+
+        private void Start()
+        {
 
         }
 
@@ -65,6 +70,8 @@ namespace Managers
         private void OnDisable()
         {
             UnsubscribeEvents();
+            SetRandomLowNumberedBlock();
+
         }
 
         #endregion
@@ -74,8 +81,14 @@ namespace Managers
         {
             for (int i = 0; i < childs.Count; i++)
             {
-                childs[i].SetActive(true);
+                childs[i].gameObject.SetActive(true);
             }
+        }
+
+        private void SetRandomLowNumberedBlock()
+        {
+            int temp = Random.Range(0, childs.Count);
+            childs[temp].SetAsLowNumberedBlock();
         }
     }
 }
