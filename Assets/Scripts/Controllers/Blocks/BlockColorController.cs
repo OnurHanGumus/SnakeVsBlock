@@ -34,13 +34,12 @@ namespace Controllers
         private void Start()
         {
             SetColor(manager.Value);
-
         }
 
         private void Init()
         {
             _srenderer = GetComponent<SpriteRenderer>();
-            _data = manager.GetData();
+            _data = manager.GetColorData();
         }
 
         public void SetColor(int score)

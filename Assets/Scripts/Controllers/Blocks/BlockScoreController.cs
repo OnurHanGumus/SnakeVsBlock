@@ -21,8 +21,6 @@ namespace Controllers
         #region Private Variables
         private BlockManager _manager;
 
-
-
         #endregion
         #endregion
 

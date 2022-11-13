@@ -10,7 +10,6 @@ namespace Commands
         #region Self Variables
         #region Private Variables
         private List<GameObject> _collectableStack;
-        private Transform _transform;
         private StackData _stackData;
         #endregion
         #endregion
@@ -18,7 +17,6 @@ namespace Commands
         public ItemAddOnStackCommand(ref List<GameObject> collectableStack, Transform transform, StackData stackData)
         {
             _collectableStack = collectableStack;
-            _transform = transform;
             _stackData = stackData;
         }
 

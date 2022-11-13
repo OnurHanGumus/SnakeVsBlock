@@ -6,6 +6,7 @@ using Managers;
 using UnityEngine;
 using Signals;
 using System.Collections;
+using Data.UnityObject;
 
 namespace Controllers
 {
@@ -20,9 +21,7 @@ namespace Controllers
 
         #region Private Variables
         private int _targetValue = 0;
-
-
-
+        private BlockData _data;
         #endregion
         #endregion
 
@@ -33,7 +32,7 @@ namespace Controllers
 
         private void Init()
         {
-
+            _data = manager.GetBlockData();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -71,7 +70,7 @@ namespace Controllers
             {
                 StopAllCoroutines();
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(_data.BreakTime);
 
             StartCoroutine(StartReduce());
         }

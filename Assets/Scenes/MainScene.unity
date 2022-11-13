@@ -6236,18 +6236,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1495296539359178726, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: d73546af402179a44aebe5b3675f8472, type: 2}
-    - target: {fileID: 1495296539359178726, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
-      propertyPath: m_AngularDrag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1495296539359178726, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 1495296539359178727, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -6292,10 +6280,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6807115853993104925, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: d73546af402179a44aebe5b3675f8472, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edcac10e37f967746bc1ca20cd8f61f6, type: 3}
 --- !u!1 &1994952899063477683

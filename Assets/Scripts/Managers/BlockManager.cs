@@ -16,8 +16,6 @@ public class BlockManager : MonoBehaviour
 
     #region Public Variables
 
-
-
     #endregion
     #region Serializefield Variables
     [SerializeField] private BlockColorController colorController;
@@ -25,8 +23,9 @@ public class BlockManager : MonoBehaviour
     #endregion
     #region Private Variables
     private int _number = 5;
-
     private BlockScoreController _blockScoreController;
+    private BlockData _data;
+
     #endregion
     #region Properties
     [ShowInInspector]
@@ -50,9 +49,11 @@ public class BlockManager : MonoBehaviour
 
     private void Init()
     {
+        _data = GetBlockData();
         _blockScoreController = GetComponent<BlockScoreController>();
     }
-    public BlockColorData GetData() => Resources.Load<CD_BlockColor>("Data/CD_BlockColor").Data;
+    public BlockColorData GetColorData() => Resources.Load<CD_BlockColor>("Data/CD_BlockColor").Data;
+    public BlockData GetBlockData() => Resources.Load<CD_BlockData>("Data/CD_BlockData").Data;
 
     private void OnEnable()
     {
@@ -82,10 +83,8 @@ public class BlockManager : MonoBehaviour
         SetRandomNumber();
     }
 
-
-
     private void SetRandomNumber()
     {
-        Value = Random.Range(1, 50);
+        Value = Random.Range(_data.ValueMin, _data.ValueMax);
     }
 }
