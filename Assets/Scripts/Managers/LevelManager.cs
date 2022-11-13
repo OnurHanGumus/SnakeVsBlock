@@ -118,6 +118,8 @@ namespace Managers
         private void OnInitializeLevel()
         {
             InitializeStage();
+            InitializeCollectables();
+            InitializeBlocks();
         }
 
         private void InitializeStage()
@@ -125,7 +127,11 @@ namespace Managers
             GameObject temp = PoolSignals.Instance.onGetObject?.Invoke(PoolEnums.Stage);
             temp.transform.position = new Vector3(transform.position.x, (_levelID + 1) * _data.HeightBtwLevels);
             temp.SetActive(true);
+        }
 
+        private void InitializeCollectables()
+        {
+            GameObject temp;
             int tempInt = Random.Range(_data.MinCollectableCount, _data.MaxCollectableCount);
             for (int i = 0; i < tempInt; i++)
             {
@@ -133,7 +139,12 @@ namespace Managers
                 temp.SetActive(true);
                 temp.transform.position = new Vector3(Random.Range(_data.CollectableMinXAxisPos, _data.CollectableMaxXAxisPos), (_levelID + 1) * _data.HeightBtwLevels + Random.Range(_data.CollectableMinYAxisPos, _data.CollectableMaxYAxisPos));
             }
+        }
 
+        private void InitializeBlocks()
+        {
+            GameObject temp;
+            int tempInt = Random.Range(_data.MinBlockCount, _data.MaxBlockCount);
             tempInt = Random.Range(_data.MinBlockCount, _data.MaxBlockCount);
             for (int i = 0; i < tempInt; i++)
             {
@@ -141,7 +152,6 @@ namespace Managers
                 temp.SetActive(true);
                 temp.transform.position = new Vector3(Random.Range(_data.BlockMinXAxisPos, _data.BlockMaxXAxisPos), (_levelID + 1) * _data.HeightBtwLevels + Random.Range(_data.BlockMinYAxisPos, _data.BlockMaxYAxisPos));
             }
-
         }
 
         

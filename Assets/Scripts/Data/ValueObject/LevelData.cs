@@ -7,12 +7,12 @@ namespace Data.ValueObject
     {
         public int HeightBtwLevels = 10;
 
-        public int MinCollectableCount = 1, MaxCollectableCount = 5;
-        public float BlockMinXAxisPos = -2.3f, BlockMaxXAxisPos = 2.3f;
-        public float BlockMinYAxisPos = 1f, BlockMaxYAxisPos = 9f;
-
         public int MinBlockCount = 0, MaxBlockCount = 3;
-        public int CollectableMinXAxisPos = -2, CollectableMaxXAxisPos = 3;
-        public int CollectableMinYAxisPos = 1, CollectableMaxYAxisPos = 9;
+        public int BlockMinXAxisPos = -2, BlockMaxXAxisPos = 3;
+        public int BlockMinYAxisPos = 1, BlockMaxYAxisPos = 9;
+
+        public int MinCollectableCount = 1, MaxCollectableCount = 5;
+        public float CollectableMinXAxisPos = -2.3f, CollectableMaxXAxisPos = 2.3f;
+        public float CollectableMinYAxisPos = 1f, CollectableMaxYAxisPos = 9f;
     }
 }
