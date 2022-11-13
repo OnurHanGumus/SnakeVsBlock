@@ -7,15 +7,16 @@ TagManager:
   - Collectable
   - Collected
   - Block
+  - CollectableDeactivator
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - CollectableDeactivator
   - Water
   - UI
-  - 
-  - 
+  - Collectable
+  - Block
   - 
   - 
   - 

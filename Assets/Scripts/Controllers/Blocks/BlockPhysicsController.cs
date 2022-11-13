@@ -54,7 +54,12 @@ namespace Controllers
                 BlockSignals.Instance.onPlayerExitBlock?.Invoke();
                 StopAllCoroutines();
             }
+            else if (other.CompareTag("CollectableDeactivator"))
+            {
+                transform.parent.gameObject.SetActive(false);
+            }
         }
+ 
 
         private IEnumerator StartReduce()
         {

@@ -56,7 +56,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -2708700823397485485, guid: b703c51033c2335479b33cf0bc39da07, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: b703c51033c2335479b33cf0bc39da07, type: 2}
+  m_sharedMaterial: {fileID: -2708700823397485485, guid: b703c51033c2335479b33cf0bc39da07, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -305,7 +305,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreController: {fileID: 7086006562822787053}
-  _number: 1
 --- !u!114 &7086006562822787053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,7 +330,7 @@ GameObject:
   - component: {fileID: 5825655616779474312}
   - component: {fileID: 5825655616779474315}
   - component: {fileID: 7232210027852858890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Physics
   m_TagString: Collectable
   m_Icon: {fileID: 0}
