@@ -27,7 +27,7 @@ namespace Commands
                 GameObject temp = PoolSignals.Instance.onGetObject?.Invoke(Enums.PoolEnums.SnakeBody);
                 temp.SetActive(true);
                 Vector3 newPos = _collectableStack[_collectableStack.Count - 1].transform.localPosition;
-                newPos.z -= _stackData.CollectableOffsetInStack;
+                newPos.y -= _stackData.CollectableOffsetInStack;
                 temp.transform.localPosition = newPos;
                 _collectableStack.Add(temp);
             }

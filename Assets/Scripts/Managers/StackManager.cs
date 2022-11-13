@@ -70,7 +70,6 @@ namespace Managers
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onRestartLevel += OnRestartLevel;
             StackSignals.Instance.onGetStackCount += OnGetStackCount;
-
         }
         private void UnSubscribeEvent()
         {
