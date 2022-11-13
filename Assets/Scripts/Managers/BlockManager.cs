@@ -57,7 +57,11 @@ public class BlockManager : MonoBehaviour
     private void OnEnable()
     {
         SubscribeEvents();
+    }
+    private void Start()
+    {
         SetRandomNumber();
+
     }
 
 
@@ -74,12 +78,10 @@ public class BlockManager : MonoBehaviour
     private void OnDisable()
     {
         UnsubscribeEvents();
+        SetRandomNumber();
     }
 
-    private void Start()
-    {
-        
-    }
+
 
     private void SetRandomNumber()
     {

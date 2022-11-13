@@ -10,6 +10,6 @@ namespace Signals
     public class PlayerSignals : MonoSingleton<PlayerSignals>
     {
         public Func<GameObject> onGetPlayer = delegate { return null; };
-
+        public UnityAction onPlayerSizeIncreased = delegate { };
     }
 }

@@ -22,7 +22,7 @@ namespace Controllers
 
         #region Private Variables
         private SpriteRenderer _srenderer;
-        private BlockColorData _data;
+        public BlockColorData _data;
 
         #endregion
         #endregion
@@ -30,7 +30,11 @@ namespace Controllers
         private void Awake()
         {
             Init();
+        }
+        private void Start()
+        {
             SetColor(manager.Value);
+
         }
 
         private void Init()

@@ -9,32 +9,21 @@ using Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class CollectableManager : MonoBehaviour
+public class CollectableCreateManager : MonoBehaviour
 {
     #region Self Variables
 
     #region Public Variables
 
+
     #endregion
     #region Serializefield Variables
 
-    [SerializeField] private CollectableScoreController scoreController;
+
     #endregion
     #region Private Variables
+    private Transform _playerTransform;
 
-    public int _number = 1;
-
-    #endregion
-    #region Properties Variables
-    public int Value
-    {
-        get { return _number; }
-        set
-        {
-            _number = value;
-            scoreController.UpdateText(Value);
-        }
-    }
     #endregion
     #endregion
 
@@ -45,9 +34,13 @@ public class CollectableManager : MonoBehaviour
 
     private void Init()
     {
+    }
+    private void Start()
+    {
+        _playerTransform = PlayerSignals.Instance.onGetPlayer().transform;
+        OnCreateCollectable();
 
     }
-    public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
 
     private void OnEnable()
     {
@@ -57,27 +50,26 @@ public class CollectableManager : MonoBehaviour
 
     private void SubscribeEvents()
     {
+        PlayerSignals.Instance.onPlayerSizeIncreased += OnCreateCollectable;
 
     }
 
     private void UnsubscribeEvents()
     {
+        PlayerSignals.Instance.onPlayerSizeIncreased -= OnCreateCollectable;
+
 
     }
-
     private void OnDisable()
     {
         UnsubscribeEvents();
-        SetRandomNumber();
     }
-    private void Start()
+    private void OnCreateCollectable()
     {
-        SetRandomNumber();
-
+        GameObject tmp = PoolSignals.Instance.onGetCollectableFromPool();
+        tmp.SetActive(true);
+        tmp.transform.position = new Vector3(Random.Range(-2,3), _playerTransform.position.y + 10);
     }
 
-    private void SetRandomNumber()
-    {
-        Value = Random.Range(1, 16);
-    }
+
 }

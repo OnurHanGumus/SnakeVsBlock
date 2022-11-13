@@ -26,7 +26,7 @@ namespace Commands
         {
             for (int i = 0; i < value; i++)
             {
-                GameObject temp = PoolSignals.Instance.onGetCollectableFromPool?.Invoke();
+                GameObject temp = PoolSignals.Instance.onGetSnakeBodyFromPool?.Invoke();
                 temp.SetActive(true);
                 Vector3 newPos = _collectableStack[_collectableStack.Count - 1].transform.localPosition;
                 newPos.z -= _stackData.CollectableOffsetInStack;

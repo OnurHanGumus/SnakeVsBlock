@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     CollectableOffsetInStack: 0.3
-    LerpSpeed_x: 0.2
+    LerpSpeed_x: 0.35
     InitializeStackAmount: 2

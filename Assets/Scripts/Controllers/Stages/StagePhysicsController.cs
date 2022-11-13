@@ -8,12 +8,12 @@ using Signals;
 
 namespace Controllers
 {
-    public class CollectablePhysicsController : MonoBehaviour
+    public class StagePhysicsController : MonoBehaviour
     {
         #region Self Variables
 
         #region Serialized Variables
-        [SerializeField] private CollectableManager manager;
+
         #endregion
 
         #region Private Variables
@@ -30,17 +30,25 @@ namespace Controllers
 
         private void Init()
         {
-
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
-                StackSignals.Instance.onInteractionCollectable?.Invoke(transform.parent.gameObject, manager.Value);
-                PlayerSignals.Instance.onPlayerSizeIncreased?.Invoke();
+                GameObject temp = PoolSignals.Instance.onGetStageFromPool?.Invoke();
+                temp.transform.position = new Vector3(transform.position.x, transform.position.y + 10);
+                temp.SetActive(true);
+            }
+
+        }
+        private void OnTriggerExit2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
                 transform.parent.gameObject.SetActive(false);
             }
+
         }
     }
 }

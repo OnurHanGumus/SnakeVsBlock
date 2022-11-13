@@ -30,7 +30,9 @@ namespace Controllers
             _manager = GetComponent<CollectableManager>();
             scoreText.text = _manager.Value.ToString();
         }
-
-        
+        public void UpdateText(int value)
+        {
+            scoreText.text = value.ToString();
+        }
     }
 }

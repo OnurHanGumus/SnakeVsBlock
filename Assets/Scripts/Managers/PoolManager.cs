@@ -11,15 +11,21 @@ public class PoolManager : MonoBehaviour
     #region Serialized Variables
 
     [SerializeField] private GameObject collectablePrefab;
+    [SerializeField] private GameObject stagePrefab;
+    [SerializeField] private GameObject snakeBodyPrefab;
 
 
 
     [SerializeField] private List<GameObject> collectablePool;
+    [SerializeField] private List<GameObject> stagePool;
+    [SerializeField] private List<GameObject> snakeBodyPool;
 
 
 
 
     [SerializeField] private int amountCollectables = 50;
+    [SerializeField] private int amountStages = 3;
+    [SerializeField] private int amountSnakeBodys = 30;
 
 
 
@@ -35,12 +41,13 @@ public class PoolManager : MonoBehaviour
     private void Init()
     {
         _levelId = LevelSignals.Instance.onGetCurrentModdedLevel();
-        InitializeEnemyPool();
-
+        InitializeCollectablePool();
+        InitializeStagePool();
+        InitializeSnakeBodyPool();
         //InitializeBulletPool();
     }
 
-    
+
 
     #region Event Subscriptions
     void Start()
@@ -54,7 +61,9 @@ public class PoolManager : MonoBehaviour
 
     private void SubscribeEvents()
     {
-        PoolSignals.Instance.onGetCollectableFromPool += OnGetEnemy;
+        PoolSignals.Instance.onGetCollectableFromPool += OnGetCollectable;
+        PoolSignals.Instance.onGetStageFromPool += OnGetStage;
+        PoolSignals.Instance.onGetSnakeBodyFromPool += OnGetSnakeBody;
 
 
 
@@ -62,19 +71,22 @@ public class PoolManager : MonoBehaviour
 
 
         //PlayerSignals.Instance.onPlayerSelectGun += OnPlayerSelectGun;
+        CoreGameSignals.Instance.onRestartLevel += OnReset;
 
     }
 
     private void UnsubscribeEvents()
     {
-        PoolSignals.Instance.onGetCollectableFromPool -= OnGetEnemy;
+        PoolSignals.Instance.onGetCollectableFromPool -= OnGetCollectable;
+        PoolSignals.Instance.onGetStageFromPool -= OnGetStage;
+        PoolSignals.Instance.onGetSnakeBodyFromPool -= OnGetSnakeBody;
 
 
         PoolSignals.Instance.onGetPoolManagerObj -= OnGetPoolManagerObj;
 
 
         //PlayerSignals.Instance.onPlayerSelectGun -= OnPlayerSelectGun;
-
+        CoreGameSignals.Instance.onRestartLevel -= OnReset;
 
     }
 
@@ -86,7 +98,7 @@ public class PoolManager : MonoBehaviour
     #endregion
 
 
-    private void InitializeEnemyPool()
+    private void InitializeCollectablePool()
     {
         collectablePool = new List<GameObject>();
         GameObject tmp;
@@ -98,7 +110,31 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    public GameObject OnGetEnemy()
+    private void InitializeStagePool()
+    {
+        stagePool = new List<GameObject>();
+        GameObject tmp;
+        for (int i = 0; i < amountStages; i++)
+        {
+            tmp = Instantiate(stagePrefab, transform);
+            tmp.SetActive(false);
+            stagePool.Add(tmp);
+        }
+    }
+
+    private void InitializeSnakeBodyPool()
+    {
+        snakeBodyPool = new List<GameObject>();
+        GameObject tmp;
+        for (int i = 0; i < amountSnakeBodys; i++)
+        {
+            tmp = Instantiate(snakeBodyPrefab, transform);
+            tmp.SetActive(false);
+            snakeBodyPool.Add(tmp);
+        }
+    }
+
+    public GameObject OnGetCollectable()
     {
         for (int i = 0; i < amountCollectables; i++)
         {
@@ -110,6 +146,30 @@ public class PoolManager : MonoBehaviour
         return null;
     }
 
+    public GameObject OnGetStage()
+    {
+        for (int i = 0; i < amountStages; i++)
+        {
+            if (!stagePool[i].activeInHierarchy)
+            {
+                return stagePool[i];
+            }
+        }
+        return null;
+    }
+
+
+    public GameObject OnGetSnakeBody()
+    {
+        for (int i = 0; i < amountSnakeBodys; i++)
+        {
+            if (!snakeBodyPool[i].activeInHierarchy)
+            {
+                return snakeBodyPool[i];
+            }
+        }
+        return null;
+    }
     public Transform OnGetPoolManagerObj()
     {
         return transform;
@@ -119,7 +179,9 @@ public class PoolManager : MonoBehaviour
     private void OnReset()
     {
         //reset
+        foreach (var i in stagePool)
+        {
+            i.transform.position = new Vector3(0, 6.88f, 0);
+        }
     }
-
-
 }
