@@ -43,7 +43,7 @@ namespace Controllers
                 _targetValue = StackSignals.Instance.onGetStackCount();
                 StartCoroutine(StartReduce());
             }
-            else if (other.CompareTag("Block"))
+            else if (other.CompareTag("Block") || other.CompareTag("Collectable"))
             {
                 transform.parent.gameObject.SetActive(false);
             }
@@ -64,6 +64,7 @@ namespace Controllers
             {
                 BlockSignals.Instance.onBlockBreaked?.Invoke();
                 StopAllCoroutines();
+                transform.parent.gameObject.SetActive(false);
             }
             if (--_targetValue <= 0)
             {

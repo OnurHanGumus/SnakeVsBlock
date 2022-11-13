@@ -58,6 +58,7 @@ public class BlockManager : MonoBehaviour
     {
         SubscribeEvents();
     }
+
     private void Start()
     {
         SetRandomNumber();
