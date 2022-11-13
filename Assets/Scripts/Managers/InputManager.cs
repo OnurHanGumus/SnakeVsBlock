@@ -29,11 +29,7 @@ namespace Managers
 
         #region Private Variables
 
-        private bool _isTouching;
 
-        private float _currentVelocity; //ref type
-        private Vector2? _mousePosition; //ref type
-        private Vector3 _moveVector; //ref type
         private bool _isPlayerDead = false;
 
         #endregion
@@ -133,7 +129,6 @@ namespace Managers
 
         private void OnReset()
         {
-            _isTouching = false;
             isReadyForTouch = false;
             isFirstTimeTouchTaken = false;
         }

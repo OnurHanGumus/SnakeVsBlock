@@ -22,7 +22,7 @@ public class BlockManager : MonoBehaviour
 
     #endregion
     #region Private Variables
-    private int _number = 5;
+    private int _number;
     private BlockScoreController _blockScoreController;
     private BlockData _data;
 
@@ -54,7 +54,7 @@ public class BlockManager : MonoBehaviour
     }
     public BlockColorData GetColorData() => Resources.Load<CD_BlockColor>("Data/CD_BlockColor").Data;
     public BlockData GetBlockData() => Resources.Load<CD_BlockData>("Data/CD_BlockData").Data;
-
+    #region Event Subcription
     private void OnEnable()
     {
         SubscribeEvents();
@@ -82,6 +82,7 @@ public class BlockManager : MonoBehaviour
         UnsubscribeEvents();
         SetRandomNumber();
     }
+    #endregion
 
     private void SetRandomNumber()
     {

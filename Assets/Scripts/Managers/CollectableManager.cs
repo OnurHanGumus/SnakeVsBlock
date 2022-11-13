@@ -22,7 +22,9 @@ public class CollectableManager : MonoBehaviour
     #endregion
     #region Private Variables
 
-    public int _number = 1;
+    private int _number = 1;
+    private CollectableData _data;
+
 
     #endregion
     #region Properties Variables
@@ -45,16 +47,15 @@ public class CollectableManager : MonoBehaviour
 
     private void Init()
     {
-
+        _data = GetData();
     }
-    public PlayerData GetData() => Resources.Load<CD_Player>("Data/CD_Player").Data;
+    public CollectableData GetData() => Resources.Load<CD_Collectable>("Data/CD_Collectable").Data;
 
+    #region Event Subcription
     private void OnEnable()
     {
         SubscribeEvents();
     }
-
-
     private void SubscribeEvents()
     {
 
@@ -70,6 +71,7 @@ public class CollectableManager : MonoBehaviour
         UnsubscribeEvents();
         SetRandomNumber();
     }
+    #endregion
     private void Start()
     {
         SetRandomNumber();
@@ -78,6 +80,6 @@ public class CollectableManager : MonoBehaviour
 
     private void SetRandomNumber()
     {
-        Value = Random.Range(1, 16);
+        Value = Random.Range(_data.MinValue, _data.MaxValue);
     }
 }

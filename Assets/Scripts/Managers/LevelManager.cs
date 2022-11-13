@@ -32,14 +32,20 @@ namespace Managers
         #region Private Variables
 
         [ShowInInspector] private int _levelID;
-
+        private LevelData _data;
         #endregion
 
         #endregion
 
         private void Awake()
         {
+            Init();
+        }
+
+        private void Init()
+        {
             _levelID = GetActiveLevel();
+            _data = GetData();
         }
 
         private int GetActiveLevel()
@@ -47,7 +53,7 @@ namespace Managers
             if (!ES3.FileExists()) return 0;
             return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
         }
-
+        private LevelData GetData() => Resources.Load<CD_Level>("Data/CD_Level").Data;
 
         #region Event Subscription
 
@@ -116,25 +122,24 @@ namespace Managers
 
         private void InitializeStage()
         {
-
             GameObject temp = PoolSignals.Instance.onGetObject?.Invoke(PoolEnums.Stage);
-            temp.transform.position = new Vector3(transform.position.x, (_levelID + 1) * 10);
+            temp.transform.position = new Vector3(transform.position.x, (_levelID + 1) * _data.HeightBtwLevels);
             temp.SetActive(true);
 
-            int tempInt = Random.Range(1, 5);
+            int tempInt = Random.Range(_data.MinCollectableCount, _data.MaxCollectableCount);
             for (int i = 0; i < tempInt; i++)
             {
                 temp = PoolSignals.Instance.onGetObject(PoolEnums.Collectable);
                 temp.SetActive(true);
-                temp.transform.position = new Vector3(Random.Range(-2.3f, 2.3f), (_levelID + 1) * 10 + Random.Range(1f, 9f));
+                temp.transform.position = new Vector3(Random.Range(_data.CollectableMinXAxisPos, _data.CollectableMaxXAxisPos), (_levelID + 1) * _data.HeightBtwLevels + Random.Range(_data.CollectableMinYAxisPos, _data.CollectableMaxYAxisPos));
             }
 
-            tempInt = Random.Range(0, 3);
+            tempInt = Random.Range(_data.MinBlockCount, _data.MaxBlockCount);
             for (int i = 0; i < tempInt; i++)
             {
                 temp = PoolSignals.Instance.onGetObject(PoolEnums.Blocks);
                 temp.SetActive(true);
-                temp.transform.position = new Vector3(Random.Range(-2, 3), (_levelID + 1) * 10 + Random.Range(1, 9));
+                temp.transform.position = new Vector3(Random.Range(_data.BlockMinXAxisPos, _data.BlockMaxXAxisPos), (_levelID + 1) * _data.HeightBtwLevels + Random.Range(_data.BlockMinYAxisPos, _data.BlockMaxYAxisPos));
             }
 
         }
