@@ -10,6 +10,6 @@ namespace Enums
         Stage,
         Blocks,
         Stick,
-
+        Particle,
     }
 }

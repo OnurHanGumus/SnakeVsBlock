@@ -480,3 +480,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 6613380568304980732}
+  particule: {fileID: 19821674, guid: 8368975de5593844bbfaf74e342fb326, type: 3}

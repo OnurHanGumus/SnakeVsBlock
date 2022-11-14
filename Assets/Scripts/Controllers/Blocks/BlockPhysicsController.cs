@@ -68,6 +68,7 @@ namespace Controllers
             if (--manager.Value <= 0)
             {
                 BlockSignals.Instance.onBlockBreaked?.Invoke();
+                PlayParticle();
                 StopAllCoroutines();
                 transform.parent.gameObject.SetActive(false);
             }
@@ -78,6 +79,13 @@ namespace Controllers
             yield return new WaitForSeconds(_data.BreakTime);
 
             StartCoroutine(StartReduce());
+        }
+
+        private void PlayParticle()
+        {
+            GameObject temp = PoolSignals.Instance.onGetObject(PoolEnums.Particle);
+            temp.transform.position = transform.position;
+            temp.SetActive(true);
         }
     }
 }
