@@ -7,7 +7,7 @@ namespace Data.ValueObject
     {
         public float CollectableOffsetInStack = 1;
 
-        public float LerpSpeed_x = 0.25f;
+        public float LerpSpeed_x = 0.25f, LerpSpeed_y = 0.25f;
         public int InitializeStackAmount = 4;
     }
 }

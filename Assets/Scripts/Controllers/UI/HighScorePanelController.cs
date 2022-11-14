@@ -23,7 +23,7 @@ public class HighScorePanelController : MonoBehaviour
     private void InitializeText()
     {
         int score = SaveSignals.Instance.onGetScore(SaveLoadStates.Score, SaveFiles.SaveFile);
-        highScoreTxt.text = "High Score: " + score.ToString();
+        highScoreTxt.text = score.ToString();
     }
 
     public void CloseScorePanel()
@@ -34,6 +34,6 @@ public class HighScorePanelController : MonoBehaviour
 
     public void OnUpdateText(int newValue)
     {
-        highScoreTxt.text = "High Score: " + newValue.ToString();
+        highScoreTxt.text = newValue.ToString();
     }
 }

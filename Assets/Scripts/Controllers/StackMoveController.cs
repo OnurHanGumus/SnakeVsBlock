@@ -14,6 +14,7 @@ namespace Controllers
 
         private StackData _stackData;
         private float _organiserValue = 1;
+        private bool _IsOnlyXAxis = false;
         #endregion
         #endregion
 
@@ -44,7 +45,7 @@ namespace Controllers
                 else
                 {
                     Vector3 pos = _collectableStack[i - 1].transform.localPosition;
-                    _collectableStack[i].transform.localPosition = Vector3.Lerp(_collectableStack[i].transform.localPosition, pos, _stackData.LerpSpeed_x); /*new Vector3(Mathf.Lerp(_collectableStack[i].transform.localPosition.x, pos.x, _stackData.LerpSpeed_x), _collectableStack[i - 1].transform.localPosition.y - (_stackData.CollectableOffsetInStack), 0);*/
+                    _collectableStack[i].transform.localPosition = new Vector3(Mathf.Lerp(_collectableStack[i].transform.localPosition.x, pos.x, _stackData.LerpSpeed_x), Mathf.Lerp(_collectableStack[i].transform.localPosition.y, pos.y, _stackData.LerpSpeed_y), 0);/*Vector3.Lerp(_collectableStack[i].transform.localPosition, pos, _stackData.LerpSpeed_x);*/ /**/
                 }
 
             }

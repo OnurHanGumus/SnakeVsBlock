@@ -15,4 +15,5 @@ MonoBehaviour:
   Data:
     CollectableOffsetInStack: 0.3
     LerpSpeed_x: 0.16
+    LerpSpeed_y: 0.16
     InitializeStackAmount: 15
