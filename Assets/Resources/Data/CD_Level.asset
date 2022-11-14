@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data:
     HeightBtwLevels: 10
-    MinBlockCount: 8
-    MaxBlockCount: 10
+    MinBlockCount: 0
+    MaxBlockCount: 3
     BlockMinXAxisPos: -2
     BlockMaxXAxisPos: 3
     BlockMinYAxisPos: 1

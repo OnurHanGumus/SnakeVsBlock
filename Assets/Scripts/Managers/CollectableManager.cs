@@ -26,8 +26,8 @@ public class CollectableManager : MonoBehaviour
     private CollectableData _data;
 
 
-    #endregion
-    #region Properties Variables
+    #endregion//PROPERTiES'E ÇEViR
+    #region Properties Variables 
     public int Value
     {
         get { return _number; }

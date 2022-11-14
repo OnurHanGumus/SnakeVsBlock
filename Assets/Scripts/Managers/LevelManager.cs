@@ -120,6 +120,7 @@ namespace Managers
             InitializeStage();
             InitializeCollectables();
             InitializeBlocks();
+            InitializeSticks();
         }
 
         private void InitializeStage()
@@ -154,7 +155,19 @@ namespace Managers
             }
         }
 
-        
+        private void InitializeSticks()
+        {
+            GameObject temp;
+            int tempInt = Random.Range(_data.MinStickCount, _data.MaxStickCount);
+            for (int i = 0; i < tempInt; i++)
+            {
+                temp = PoolSignals.Instance.onGetObject(PoolEnums.Stick);
+                temp.SetActive(true);
+                temp.transform.position = new Vector3(Random.Range((int)(_data.StickMinXAxisPos * _data.StickXAxisMultiplier),(int)(_data.StickMaxXAxisPos * _data.StickXAxisMultiplier)) + _data.StickXOffset, (_levelID + 1) * _data.HeightBtwLevels + Random.Range(_data.StickMinYAxisPos, _data.StickMaxYAxisPos));
+            }
+        }
+
+
         private void OnClearActiveLevel()
         {
             levelClearer.ClearActiveLevel(levelHolder.transform);

@@ -14,6 +14,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private GameObject stagePrefab;
     [SerializeField] private GameObject snakeBodyPrefab;
     [SerializeField] private GameObject blockPrefab;
+    [SerializeField] private GameObject stickPrefab;
 
     [SerializeField] private Dictionary<PoolEnums, List<GameObject>> poolDictionary;
 
@@ -22,6 +23,7 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private int amountStages = 3;
     [SerializeField] private int amountSnakeBodys = 30;
     [SerializeField] private int amountBlocks = 10;
+    [SerializeField] private int amountStick = 30;
 
 
 
@@ -42,6 +44,7 @@ public class PoolManager : MonoBehaviour
         InitializePool(PoolEnums.SnakeBody, snakeBodyPrefab, amountSnakeBodys);
         InitializePool(PoolEnums.Stage, stagePrefab, amountStages);
         InitializePool(PoolEnums.Blocks, blockPrefab, amountBlocks);
+        InitializePool(PoolEnums.Stick, stickPrefab, amountStick);
     }
 
 
@@ -115,6 +118,7 @@ public class PoolManager : MonoBehaviour
         ResetPool(PoolEnums.SnakeBody);
         ResetPool(PoolEnums.Stage);
         ResetPool(PoolEnums.Blocks);
+        ResetPool(PoolEnums.Stick);
     }
 
     private void ResetPool(PoolEnums type)

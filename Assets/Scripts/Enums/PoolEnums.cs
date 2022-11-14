@@ -9,5 +9,7 @@ namespace Enums
         SnakeBody,
         Stage,
         Blocks,
+        Stick,
+
     }
 }
