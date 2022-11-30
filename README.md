@@ -1,4 +1,4 @@
-# Base Defense! Clone
+# Snake vs Block Clone
 
 Solid prensiplerine uygun olarak hazırladığım bu projede ayrıca aşağıdaki pattern'leri ve optimizasyon yöntemlerini kullandım.
 
