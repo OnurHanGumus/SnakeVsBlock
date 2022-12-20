@@ -7,7 +7,6 @@ using Extentions;
 using Keys;
 using Signals;
 using UnityEngine;
-using Sirenix.OdinInspector;
 using Random = UnityEngine.Random;
 
 public class BlockManager : MonoBehaviour
@@ -28,7 +27,6 @@ public class BlockManager : MonoBehaviour
 
     #endregion
     #region Properties
-    [ShowInInspector]
     public int Value
     {
         get { return _number; }

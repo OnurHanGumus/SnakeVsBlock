@@ -6,7 +6,6 @@ using Enums;
 using Extentions;
 using Keys;
 using Signals;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -31,7 +30,7 @@ namespace Managers
 
         #region Private Variables
 
-        [ShowInInspector] private int _levelID;
+        private int _levelID;
         private LevelData _data;
         #endregion
 
