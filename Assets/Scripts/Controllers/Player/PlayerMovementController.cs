@@ -47,11 +47,11 @@ namespace Controllers
             {
                 if (_isInteractedBlock)
                 {
-                    _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, 0, 0);
+                    _rig.linearVelocity = new Vector3(_xValue * _data.SpeedHorizontal, 0, 0);
                 }
                 else
                 {
-                    _rig.velocity = new Vector3(_xValue * _data.SpeedHorizontal, _data.SpeedVertical, 0);
+                    _rig.linearVelocity = new Vector3(_xValue * _data.SpeedHorizontal, _data.SpeedVertical, 0);
                 }
             }
         }
@@ -80,7 +80,7 @@ namespace Controllers
         public void OnInteractionBlock()
         {
             _isInteractedBlock = true;
-            _rig.velocity = Vector2.zero;
+            _rig.linearVelocity = Vector2.zero;
         }
         public void OnExitBlock()
         {
@@ -88,7 +88,7 @@ namespace Controllers
         }
         public void OnRestartLevel()
         {
-            _rig.velocity = Vector3.zero;
+            _rig.linearVelocity = Vector3.zero;
             _isActive = false;
             transform.position = Vector3.zero;
 

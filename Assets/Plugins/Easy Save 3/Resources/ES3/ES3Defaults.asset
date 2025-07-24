@@ -32,9 +32,10 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - Cinemachine
-    - AllIn1VfxAssmebly
-    - AllIn1VfxDemoScriptAssemblies
+    - PPv2URPConverters
     - AllIn1VfxTexDemoAssembly
+    - AllIn1VfxDemoScriptAssemblies
+    - AllIn1VfxAssmebly
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1
